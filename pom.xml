@@ -28,11 +28,18 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
+		<!--<dependency>
+		    <groupId>mysql</groupId>
+		    <artifactId>mysql-connector-java</artifactId>
+		    <version>8.0.33</version>  Make sure to use a version compatible with your Spring Boot version 
+		</dependency>-->
+		
 		<dependency>
-    <groupId>mysql</groupId>
-    <artifactId>mysql-connector-java</artifactId>
-    <version>8.0.33</version> <!-- Make sure to use a version compatible with your Spring Boot version -->
-</dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>

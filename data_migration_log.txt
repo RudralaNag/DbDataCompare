@@ -1,1 +1,8 @@
+Table DEVELOPER exists in database1 but not in database2.
 
+Data mismatch in table EMPLOYEE at row 1:
+Database1 row: {EMPID=1, FIRSTNAME=John1, LASTNAME=Doe, ADDRESS=123 Main St}
+Database2 row: {EMPID=1, FIRSTNAME=John, LASTNAME=Doe, ADDRESS=123 Main St}
+
+Extra row found in database2 table EMPLOYEE at row 3:
+Database2 row: {EMPID=3, FIRSTNAME=Ram, LASTNAME=raj, ADDRESS=58 main road}

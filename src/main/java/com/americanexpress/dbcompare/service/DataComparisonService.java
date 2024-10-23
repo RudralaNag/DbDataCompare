@@ -25,12 +25,15 @@ public class DataComparisonService {
 	
 	@Value("${source.database}")
 	private String soruceDatabaseName;
+	
+	@Value("${destination.database}")
+	private String destinationDatabaseName;
 
 	public void compareDatabases() {
 		try (FileWriter logFile = new FileWriter("data_migration_log.txt", true)) {
 			// Fetch the list of tables from both databases
-			List<String> tablesDatabase1 = fetchTables(jdbcTemplateDatabase1);
-			List<String> tablesDatabase2 = fetchTables(jdbcTemplateDatabase2);
+			List<String> tablesDatabase1 = fetchSourceDBTables(jdbcTemplateDatabase1);
+			List<String> tablesDatabase2 = fetchDestinationDBTables(jdbcTemplateDatabase2);
 
 			for (String table : tablesDatabase1) {
 				if (tablesDatabase2.contains(table)) {
@@ -46,9 +49,14 @@ public class DataComparisonService {
 		}
 	}
 
-	private List<String> fetchTables(JdbcTemplate jdbcTemplate) {
+	private List<String> fetchSourceDBTables(JdbcTemplate jdbcTemplate) {
 		String query = "SELECT table_name FROM information_schema.tables WHERE table_schema = ?";
 		return jdbcTemplate.queryForList(query, new Object[] { soruceDatabaseName }, String.class);
+	}
+	
+	private List<String> fetchDestinationDBTables(JdbcTemplate jdbcTemplate) {
+		String query = "SELECT table_name FROM information_schema.tables WHERE table_schema = ?";
+		return jdbcTemplate.queryForList(query, new Object[] { destinationDatabaseName }, String.class);
 	}
 
 	private void compareTableData(String tableName, FileWriter logFile) throws IOException {

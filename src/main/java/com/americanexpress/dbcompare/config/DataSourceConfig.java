@@ -18,7 +18,6 @@ import jakarta.persistence.EntityManagerFactory;
 
 @Configuration
 @EnableTransactionManagement
-
 public class DataSourceConfig {
 
 	// Database1 DataSource
